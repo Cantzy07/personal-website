@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Telex&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="/" id="navbar__logo">Lucas Nguyen</a>
+            <div class="navbar__toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="/about.html" class="navbar__links">About Me</a>
+                </li>
+                <li class="navbar__item">
+                    <a href="/projects.html" class="navbar__links">Portfolio</a>
+                </li>
+                <li class="navbar__item">
+                    <a href="/resume.html" class="navbar__links">Resume</a>
+                </li>
+                <li class="navbar__item">
+                    <a href="/contact.html" class="navbar__links">Contact Me</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="animation-globe">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+        <script>
+        VANTA.GLOBE({
+        el: "#animation-globe",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xb8b8b8,
+        backgroundColor: 0xffffff
+        })
+        </script>
+    </div>
+
+    <!-- Tabs navigation -->
+<!-- Tabs navigation -->
+<div class="tabs">
+    <button class="tab-btn active" data-tab="education">
+        <span class="tab-label">Education</span>
+      </button>
+    <button class="tab-btn" data-tab="skills">
+      <span class="tab-label">Skills</span>
+    </button>
+    <button class="tab-btn" data-tab="experience">
+      <span class="tab-label">Experience</span>
+    </button>
+</div>
+
+<div class="tab-content active" id="education">
+    <h1>Education</h1>
+    <div class="about-card">
+        <h1>University</h1>
+        <h2>Purdue University</h2>
+        <p class="edu-item">
+            <span class="edu-dates">Master’s of Science in Computer Engineering (ML Track) — Jan 2025 to May 2026</span>
+            <span class="edu-gpa">GPA: 4.00/4.00</span>
+          </p>
+          <p class="edu-item">
+            <span class="edu-dates">Bachelor’s of Science in Computer Engineering (SWE + ML/AI) — Aug 2022 to Dec 2025</span>
+            <span class="edu-gpa">GPA: 3.79/4.00</span>
+          </p>
+        <h2>Relevant Coursework</h2>
+        <ul class="about-list">
+            <li>Intro to Artificial Intelligence</li>
+            <li>Comptuter Network Systems</li>
+            <li>Python for Data Science</li>
+            <li>Advanced C Programming</li>
+            <li>Data Structures and Algorithms</li>
+            <li>Object Oriented Programming in C++</li>
+            <li>Probabalistic Methods</li>
+        </ul>
+    </div>
+    <div class="about-card">
+        <h1>High School</h1>
+        <h2>James Madison High School - {September 2018 - June 2022}</h2>
+    </div>
+  </div>
+  
+  <!-- Tab content panes -->
+  <div class="tab-content" id="skills">
+    <h1>Skills</h1>
+    <div class="about-card">
+        <h1>Languages</h1>
+        <ul class="about-list">
+            <li>Python</li>
+            <li>C++</li>
+            <li>Java</li>
+            <li>C</li>
+            <li>SQL</li>
+            <li>Bash</li>
+            <li>JavaScript</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>Matlab</li>
+        </ul>
+    </div>
+    <div class="about-card">
+        <h1>Frameworks</h1>
+        <ul class="about-list">
+            <li>Pytorch</li>
+            <li>Tensorflow</li>
+            <li>React</li>
+            <li>Angular</li>
+            <li>Flask</li>
+        </ul>
+    </div>
+    <div class="about-card">
+        <h1>Tools/Libraries</h1>
+        <ul class="about-list">
+            <li>Git</li>
+            <li>JIRA</li>
+            <li>Numpy</li>
+            <li>Pandas</li>
+            <li>Matplotlib</li>
+            <li>Scikit-learn</li>
+            <li>Docker</li>
+            <li>Node.js</li>
+        </ul>
+    </div>
+  </div>
+  
+  <div class="tab-content" id="experience">
+    <h1>Experience</h1>
+    <div class="about-card">
+        <h1>Internships</h1>
+        <h2>Collins Aerospace - Largo, FL</h2>
+        <p>Fullstack Software Engineer - in progress</p>
+        <h2>C&R Software - Fairfax, VA</h2>
+        <p>Backend Software Engineer - {May 2024 - August 2024}</p>
+        <ul class="about-list">
+            <li>Led a team of interns to facilitate JPA/Hibernate framework upgrades by replacing 100+ deprecated methods using
+                SQL/HQL and used paging functionality and cross-referenced XML data to access/verify database resources in Java</li>
+            <li>Designed and implemented 50+ integration/regression tests in Java using DAOs/DTOs to ensure proper database access
+                across multiple classes and validate equivalent functionality with JPA/Hibernate upgrade changes</li>
+            <li>Implemented REST API code changes to facilitate client specific data read/writing functionality</li>
+            <li>Executed backport/bug issue fixes by leveraging Agile methodologies and implementing logic and runtime efficiency
+                changes to various classes and APIs</li>
+        </ul>
+
+        <p>Full Stack Software Engineer - {May 2023 - August 2023}</p>
+        <ul class="about-list">
+            <li>Optimized 200+ check style issues in the back-end codebase libraries to improve code readability and efficiency in Java</li>
+            <li>Designed 10 Junit test cases to ensure code functionality and quality on various REST service APIs</li>
+            <li>Implemented fixes to prevent security vulnerabilities using transport layer security and signature verification in Java</li>
+            <li>Improved frontend user experience and fixed visual functionality bugs using CSS, JavaScript, and TypeScript</li>
+        </ul>
+    </div>
+    <div class="about-card">
+        <h1>Research</h1>
+        <h2>Guo Labs - West Lafayette, IN</h2>
+        <p>Computer Vision Research Assistant (Blurry-Edges, CT-Bound) - {Dec 2024 - Present}</p>
+        <ul class="about-list">
+            <li>Developed machine learning architecture for edge detection and distance estimation in noisy images and low light</li>
+            <li>Improved accuracy in detecting distance between objects in noisy images using edge smoothness parameters</li>
+            <li>Increased forward pass speed through the model while maintaining estimation accuracy by pruning convolutional and fully connected layers
+                resulting in a 10% parameter reduction</li>
+            <li>Analyzed floating point operations and computational complexity for local and global stages to target bottlenecks</li>
+            <li>Developed new derivative map, boundary map, and boundary distance training data using the Thingi10k dataset and blender 
+                by rendering 60 frame animations with realistic textures, movement, and scaling</li>
+        </ul>
+    </div>
+    <div class="about-card">
+        <h1>Extracurriculars</h1>
+        <h2>Kappa Pi Beta Inc. - West Lafayette, IN</h2>
+        <p>Chapter Treasurer - {August 2023 - December 2024}</p>
+        <ul class="about-list">
+            <li>Oversaw and coordinated fundraiser events by managing budgets and logistics planning</li>
+            <li>Communicated budget goals as well as cost profit analysis and maintained transparency in financial reporting</li>
+        </ul>
+        <h2>Purdue Powerlifting - West Lafayette, IN</h2>
+        <p>Competitive Team Member</p>
+        <ul class="about-list">
+            <li>Represented Purdue University at USAPL Collegiate Nationals 2024 in Oklahoma City, OK</li>
+            <li>Earned 19th place in the 75kg men's raw weight class</li>
+            <li>Squat: 529lbs</li>
+            <li>Bench: 286lbs</li>
+            <li>Deadlift: 561lbs</li>
+            <li>Dots: 465.78</li>
+        </ul>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+    
+</body>
+</html>

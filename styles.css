@@ -1,0 +1,1141 @@
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Telex", serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    /* 1) define the “float‐down” animation */
+    @keyframes floatDown {
+        from {
+        transform: translateY(-20px);
+        opacity: 0;
+        }
+        to {
+        transform: translateY(0);
+        opacity: 1;
+        }
+    }
+
+    @keyframes floatUp {
+        from {
+        transform: translateY(20px);
+        opacity: 0;
+        }
+        to {
+        transform: translateY(0);
+        opacity: 1;
+        }
+    }
+
+    @keyframes slideInFromLeft {
+        from {
+          transform: translateX(-100%) skewY(-25deg) rotate(25deg);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0)    skewY(-25deg) rotate(25deg);
+          opacity: 1;
+        }
+      }
+      
+      @keyframes slideInFromRight {
+        from {
+          transform: translateX(100%) skewY(-25deg) rotate(25deg);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0)    skewY(-25deg) rotate(25deg);
+          opacity: 1;
+        }
+      }
+
+    /*=== Global Styles ===*/
+    body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    /* background: linear-gradient(
+    135deg,
+    #212121 0%,
+    #272727 25%,
+    #323232 50%,
+    #3a3a3a 75%,
+    #464646 100%
+    ); */
+    /* shorthand to load one fixed, centered, cover-sized bg image */
+
+    background-size: cover;  /* scale it so it always fills the screen */
+    color: #333333;
+    overflow-x: hidden;
+    background-attachment: fixed;
+    }
+    h1 {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 2.5rem;
+    }
+    
+    /* ensure your page content sits above it */
+    .navbar,
+    .main__container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .navbar {
+        background: transparent;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        transition: background 0.8s ease, box-shadow 0.3s ease;
+    }
+
+    .navbar__container {
+        display: flex;
+        justify-content: space-between;
+        height: 80px;
+        z-index: 1;
+        width: 100%;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 50px;
+    }
+
+    #navbar__logo {
+        background-color: #b2b2b2;
+        background-size: 100%;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-text-fill-color: transparent;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 2rem;
+    }
+
+    .fa-gem {
+        margin-right: 0.5rem;
+    }
+
+    .navbar__menu {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        text-align: center;
+        flex-wrap: nowrap;
+    }
+
+    .navbar__item {
+        height: 80px;
+    }
+
+    .navbar__links {
+        color: #b2b2b2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        padding: 0 1rem;
+        height: 100%;
+    }
+
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        padding: 10px 5px;
+        height: 100%;
+        width: 100%;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        background: transparent;
+        color: #9f9f9f;
+    }
+
+    .button:hover {
+        background: #e3e3e3;
+        transition: all 0.3s ease;
+    }
+
+    .navbar__links:hover {
+        color: #4f4f4f;
+        transition: all 0.3s ease;
+    }
+      
+      /* 2) Use ::before to paint the blur+bg on scroll */
+      .navbar::before {
+        content: "";
+        position: absolute;
+        inset: 0;                    /* cover the entire nav */
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        transition: backdrop-filter 0.4s ease, background 0.4s ease;
+        z-index: -1;                 /* behind the nav’s content */
+      }
+      .navbar.scrolled::before {
+        background: rgba(194,194,194,0.25);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+    @media screen and (max-width: 960px) {
+        .navbar__container {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            z-index: 1;
+            width: 100%;
+            max-width: 1300px;
+            padding: 0;
+        }
+
+        .navbar__menu {
+            display: grid;
+            grid-template-columns: auto;
+            margin: 0;
+            width: 100%;
+            position: absolute;
+            top: -1000px;
+            opacity: 0;
+            transition: all 0.5s ease;
+            height: 50vh;
+            z-index: -1;
+        }
+
+        .navbar__menu.active::before {
+            content: "";
+            position: absolute;
+            inset: 0;                  /* cover the entire menu */
+            background: rgba(232, 232, 232, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: -1;               /* behind the menu’s list items */
+          }
+          .navbar__menu.active {
+            top: 100%;
+            opacity: 1;
+            transform: translateY(-15px);
+          }
+
+        #navbar__logo {
+            padding-left: 25px;
+        }
+
+        .navbar__toggle .bar {
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            transition: all 0.3s ease-in-out;
+            background: #b2b2b2;
+        }
+
+        .navbar__item {
+            width: 100%;
+        }
+
+        .navbar__links {
+            text-align: center;
+            padding: 2rem;
+            width: 100%;
+            display: table;
+            color: #b2b2b2;
+            font-size: 1.6rem;
+        }
+
+        #mobile-menu {
+            position: absolute;
+            top: 20%;
+            right: 5%;
+            transform: translate(5%, 20%);
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70%;
+            height: 80px;
+            margin: 0;
+        }
+
+        .navbar__toggle .bar {
+            display: block;
+            cursor: pointer;
+        }
+
+        #mobile-menu.is-active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        #mobile-menu.is-active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        #mobile-menu.is-active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+    }
+
+/* Hero Section */
+.main {
+    display: flex;
+    background-color: transparent;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.main__container {
+    height: 100vh;
+    z-index: 1;
+    width: 100%;
+    padding: 50vh 50px;
+}
+
+.icons {
+    position: absolute;    /* pull the whole group out of flow */
+    top: 50%;              /* vertically center the group */
+    right: 20px;           /* distance from the right edge */
+    transform: translateY(-50%);
+    flex-direction: column;
+    
+    display: flex;         /* lay icons in a row (default) */
+    gap: 1rem;             /* space between each icon */
+    
+    z-index: 50;
+    opacity: 0.5;          /* whatever opacity you like */
+  }
+  
+  /* NO more bottom/right on each <a> */
+  .icons a {
+    display: block;
+    width: 60px;
+    cursor: pointer;
+    
+    /* animation you already have */
+    transform: rotate(-10deg) translateY(-20px);
+    opacity: 0;
+    animation: floatUp 0.6s ease-out forwards;
+  }
+
+/* stagger them & set horizontal positions */
+.icons a:nth-child(1) { animation-delay: 0.2s; }
+.icons a:nth-child(2) { animation-delay: 0.4s; }
+.icons a:nth-child(3) { animation-delay: 0.6s; }
+.icons a:nth-child(4) { animation-delay: 0.8s; }
+
+.icons a img {
+width: 100%;
+display: block;
+pointer-events: auto;            /* needed if you ever removed it before */
+transition: filter 0.25s ease;   /* smooth hover effect */
+}
+
+/* 4) Now actually darken on hover */
+.icons a:hover img {
+opacity: 0.8;
+}
+
+/* 2) prepare the children to be invisible/offscreen at page load */
+.main__content > * {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+/* 3) stagger them by adding increasing delays */
+.main__content > *:nth-child(1) { animation: floatDown 1s ease-out forwards; animation-delay: 0.4s; }
+.main__content > *:nth-child(2) { animation: floatUp 1.5s ease-out forwards; animation-delay: 1.4s; }
+
+.main__content {
+    margin-top: -10rem;
+}
+
+.main__content h1 {
+    z-index: 3;
+    font-size: 5rem;
+    text-align: center;
+    background-color: #515050;
+    background-image: #b3caff;
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.main__content p {
+    z-index: 3;
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #515050;
+    text-align: center;
+}
+
+/*quote section*/
+.quote-section {
+position: relative;
+padding: 4rem 0;            /* space above/below */
+overflow: hidden;           /* clip the skewed shapes */
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 5%;
+opacity: 0.65;
+}
+
+    /* both shapes share these basics */
+.quote-section::before,
+.quote-section::after {
+content: "";
+position: absolute;
+width: 35%;               /* just a bit wider than the viewport */
+height: 80px;              /* thickness of your bars */
+background: #bdbdbd;
+transform-origin: top left;
+transform: skewY(-25deg) rotate(25deg);
+}
+
+/* top bar */
+.quote-section::before {
+  top: 15px;
+  left: 30%;
+  transform: skewY(-25deg) rotate(25deg) translateX(100vw);
+}
+
+/* bottom bar */
+.quote-section::after {
+  bottom: 15px;
+  left: 40%;
+  transform: skewY(-25deg) rotate(25deg) translateX(-100vw);
+}
+
+.quote-section.in-view::before {
+animation: slideInFromRight 1.2s ease-out forwards;
+}
+.quote-section.in-view::after {
+animation: slideInFromLeft  1.2s ease-out forwards 0.1s;
+}
+      
+/* your quote text */
+.quote-text {
+position: relative;         /* above the shapes */
+z-index: 1;
+max-width: 500px;
+text-align: center;
+color: #292929;
+font-size: 1.75rem;
+line-height: 1.4;
+}
+
+/* smaller attribution */
+.quote-text footer {
+margin-top: 1rem;
+font-size: 1rem;
+opacity: 0.8;
+}
+
+@media screen and (max-width: 960px) {
+    .quote-section::before,
+    .quote-section::after {
+    width: 60%;
+    }
+
+    .quote-section::before {
+        left: 15%;
+      }
+      
+      /* bottom bar */
+      .quote-section::after {
+        left: 35%;
+      }
+}
+
+/* 2) Style the parallax wrapper */
+.about-parallax {
+position: relative;
+min-height: 100vh;                   /* fill the viewport */
+display: flex;
+align-items: center;
+justify-content: center;
+margin-top: 15%;
+
+/* the magic: one single background that stays fixed */
+background-color: transparent;
+background-attachment: fixed;
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+}
+
+#animation-globe {
+    position: fixed;    /* stick to the viewport */
+    top: 0;
+    left: 0;    
+    width: 100%;
+    height: 100%;
+    z-index: 0;         /* behind your main content */
+    pointer-events: none; /* let clicks pass through */
+}
+
+/* the Vanta container */
+#animation-birds {
+position: fixed;    /* stick to the viewport */
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 0;         /* behind your main content */
+pointer-events: none; /* let clicks pass through */
+
+opacity: 0;
+transform: translateY(-100vh);
+
+/* animate in after a 2s pause */
+animation: birdsFlyIn 6s ease-out 2.5s forwards;
+}
+
+@keyframes birdsFlyIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+/* 3) Your content card so text stays readable */
+.about-text {
+display: grid;
+grid-template-columns: 2fr 1fr;
+grid-auto-rows: auto;
+column-gap: 2rem;
+align-items: start;
+background: rgba(194, 194, 194, 0.25);   /* light mist over whatever’s behind */
+backdrop-filter: blur(10px);          /* optional “frosted glass” effect */
+box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+padding: 3rem;
+border-radius: 12px;
+text-align: center;
+width: 70%;
+height: auto;
+}
+
+.about-text h2 {
+    grid-column: 1;
+    margin: 0 0 1.5rem;
+    font-size: 2.5rem;
+    text-align: center;
+    position: relative;
+    color: #3d3d3d;
+  }
+  .about-text h2::after {
+    content: "";
+    display: block;               /* makes width/margin work */
+    margin: 0 auto 0;        /* top-space, auto left/right, no bottom */
+    width: 140px;                 /* your line length */
+    height: 4px;
+    background: #92c3ff;
+    border-radius: 2px;
+  }
+
+.about-text p {
+    text-align: left;
+    grid-column: 1;
+    max-width: 500px;
+    justify-self: center;
+    color: #363636;
+}
+
+.personal-photo {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    justify-self: center;  /* center it horizontally in its column */
+    align-self: center;    /* center it vertically across those two rows */
+    
+    width: 100%;           /* fill its grid cell */
+    max-width: 250px;      /* cap the size */
+    height: auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+@media screen and (max-width: 960px) {
+    .personal-photo {
+        display: none;
+    }
+
+    .about-text {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Optional smooth scroll behavior (modern browsers) */
+html {
+scroll-behavior: smooth;
+}
+
+/* resume */
+.resume__container {
+    display: grid;
+    position: relative;
+    grid-template-rows:
+    auto        /* header */
+    1fr         /* PDF viewer stretches */
+    auto        /* download + footer */;
+    align-items: center;
+    justify-items: center;
+    margin: 0 auto;
+    height: 100%;
+    background-color: transparent;
+    z-index: 1;
+    width: 100%;
+    padding: 50px;
+}
+
+.resume__download {
+    footer {
+        width: 100%;
+        background-color: transparent;
+    }
+}
+
+/* PDF embed styling */
+.pdf-container {
+width: 55%;
+height: 100vh;
+box-shadow: 2px 8px 40px 20px rgba(0, 0, 0, 0.4);
+}
+
+@media screen and (max-width: 960px) {
+    .resume__container {
+        padding: 10px;
+    }
+    .pdf-container {
+        width: 100%;
+    }
+}
+
+.resume-img {
+    height: 100%;
+    width: 100%;
+}
+/* Download button styling */
+.download-button {
+display: inline-block;
+margin: 1.5rem 0;
+padding: 0.75rem 1.25rem;
+background: #00539C;
+color: #fff;
+text-decoration: none;
+border-radius: 4px;
+font-size: 1rem;
+}
+.download-button:hover {
+background: #003f7d;
+}
+
+.resume__container h1 {
+    font-size: 3rem;
+    color: #4c4c4c;
+    background-size: 100%;
+    margin-bottom: 30px;
+}
+
+.resume__container p {
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/*=== Projects Grid ===*/
+.portfolio-title {
+    position: relative;
+    color: #333333;
+    z-index: 1;
+}
+
+.projects-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-self: center;
+    justify-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    height: 100%;
+    background-color: transparent;
+    z-index: 1;
+    width: 100%;
+    padding: 50px;
+    gap: 2rem;
+}
+
+@media screen and (max-width: 960px) {
+    .projects-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*=== Card Styles ===*/
+/* 1) Start each card out invisible & up a bit */
+.project-card {
+    opacity: 0;
+    transform: translateY(-20px);
+    /* 2) apply the floatDown animation */
+    animation: floatDown 0.6s ease-out forwards;
+}
+
+/* 3) Stagger them by child index */
+.project-container .project-card:nth-child(1) { animation-delay: 0.2s; }
+.project-container .project-card:nth-child(2) { animation-delay: 0.4s; }
+
+.project-card {
+    background: #f3f9ff;
+    width: 80%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.4);
+    opacity: 0.25;
+    transform: none;
+}
+.project-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+/*=== Image ===*/
+.project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    overflow-y: hidden;
+}
+
+/*=== Content ===*/
+.project-content {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.project-content h2 {
+    color: #333333;
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+}
+.project-content p {
+    color: #333333;
+    flex: 1;
+    font-size: 1rem;
+    margin: 0 0 20px;
+}
+.project-content a {
+    text-decoration: none;
+    color: #fff;
+    background: #7fc1fb;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-align: center;
+    transition: background 0.3s;
+}
+.project-content a:hover {
+    background: #225a91;
+}
+
+/*=== Contacts ===*/
+/* 2) Prepare each top-level section to be invisible & up a bit */
+.contact-container > * {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: floatDown 0.6s ease-out forwards;
+}
+
+/* 3) Stagger them */
+.contact-container > *:nth-child(1) { animation-delay: 0.2s; } /* <h1> */
+.contact-container > *:nth-child(2) { animation-delay: 0.4s; } /* .contact-links */
+.contact-container > *:nth-child(3) { animation-delay: 0.6s; } /* .contact-form */
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-self: center;
+    justify-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    height: 100vh;
+    background-color: transparent;
+    z-index: 1;
+    width: 100%;
+    padding: 50px;
+}
+
+.contact-container h1 {
+    margin-bottom: 0.5rem;
+}
+
+/* turn the whole section into one horizontal row */
+.contact-links {
+    display: flex;
+    align-items: center;     /* vertically center heading + links */
+    gap: 1rem;               /* space between heading and link list */
+    margin: 0;               /* reset any top/bottom margins */
+}
+
+/* remove extra spacing on the heading */
+.contact-links h2 {
+    margin: 0;               /* no under/over-shoot */
+    white-space: nowrap;     /* keep “Find me on” together */
+    font-size: 1.25rem;
+}
+
+/* make the <ul> inline and space out its items */
+.contact-links ul {
+    display: flex;
+    list-style: none;        /* remove bullets */
+    margin: 0;               /* reset default list margins */
+    padding: 0;              /* reset default list padding */
+    gap: 1rem;               /* space between each link */
+}
+
+/* style links */
+.contact-links a {
+    text-decoration: none;
+    color: #00539C;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+.contact-links a:hover {
+    text-decoration: underline;
+}
+
+.contact-form {
+    background: rgba(221, 221, 221, 0.75);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    border-radius: 10px;
+
+    /* make it wider up to a cap */
+    width: 100%;         /* fill its grid cell */
+    max-width: 700px;    /* cap its width */
+    box-sizing: border-box;
+}
+
+.contact-form h2 {
+    margin-bottom: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+width: 100%;
+padding: 12px;
+font-size: 1rem;
+margin-bottom: 15px;
+box-sizing: border-box;
+}
+
+.inquiry-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    background: #504f4f;
+    color: #fff;
+    font-size: 1rem;
+}
+.inquiry-btn:hover {
+background: #848484;
+cursor: pointer;
+}
+
+/* animate each list item in “Find me on” */
+.contact-links ul li {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: floatDown 0.6s ease-out forwards;
+}
+.contact-links ul li:nth-child(1) { animation-delay: 0.8s; }
+.contact-links ul li:nth-child(2) { animation-delay: 1.0s; }
+.contact-links ul li:nth-child(3) { animation-delay: 1.2s; }
+
+/* animate each form group and button */
+.contact-form .form-group,
+.contact-form .inquiry-btn {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: floatDown 0.6s ease-out forwards;
+}
+.contact-form .form-group:nth-child(1) { animation-delay: 0.8s; }
+.contact-form .form-group:nth-child(2) { animation-delay: 1.0s; }
+.contact-form .form-group:nth-child(3) { animation-delay: 1.2s; }
+.contact-form .form-group:nth-child(4) { animation-delay: 1.4s; }
+.contact-form .inquiry-btn            { animation-delay: 1.6s; }
+
+/*=== About ===*/
+/* Tabs row */
+.tabs {
+    display: flex;
+    margin: 0;
+    background-color: transparent;
+    width: 100%;
+}
+
+.tab-btn {
+position: relative;
+flex: 1;
+color: #fff;
+text-align: center;
+background: none;
+border: none;
+padding: 0.75rem 0;
+font-size: 1rem;
+cursor: pointer;
+transition: background 0.2s;
+overflow: hidden;
+}
+
+/* make sure span only takes as much width as its text */
+.tab-btn .tab-label {
+    position: relative;
+    display: inline-block;
+    /* (optional) to prevent the span from wrapping, if you have long labels */
+    white-space: nowrap;  
+    background: none;
+    color: #333333;
+}
+
+/* underline bar on the text span */
+.tab-btn .tab-label::after {
+content: "";
+position: absolute;
+left: 0;
+bottom: -2px;                /* just beneath the text */
+width: 0%;                   /* start hidden */
+height: 2px;                 /* thickness */
+background-color: #b6e7ff;   /* accent color */
+transition: width 0.3s ease; /* animate the growth */
+}
+
+/* grow the underline when hovering the button OR when active */
+.tab-btn:hover .tab-label::after,
+.tab-btn.active .tab-label::after {
+width: 100%;                 /* full width of the text span */
+}
+
+/* Content panes */
+.tab-content {
+display: none;
+padding: 1rem 0;
+background: transparent;
+justify-content: center;
+justify-items: center;
+color: #333333;
+}
+
+.tab-content.active {
+display: block;
+}
+
+/* ▶️ 1. Reset the UL so bullets & indents go away */
+.tab-content#skills .about-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+    /* ▶️ flex‐wrap so items flow onto multiple lines */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;           /* space between tags */
+    justify-content: center;
+  }
+  
+  /* ▶️ 2. Style each LI as a pill */
+  .tab-content#skills .about-list li {
+    background: #f1f1f1;    /* light grey background */
+    border: 1px solid #ddd; /* subtle border */
+    border-radius: 999px;   /* pill shape */
+    padding: 0.25rem 0.75rem;
+    font-size: 0.9rem;
+    color: #333;
+    white-space: nowrap;    /* keep words together */
+  }
+  
+  /* ▶️ 3. (optional) Add a hover or focus effect */
+  .tab-content#skills .about-list li:hover {
+    background: #e0e0e0;
+    cursor: default;
+  }
+
+.about-card {
+background: #f3f9ff;
+width: 80%;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+transition: transform 0.3s, box-shadow 0.3s;
+display: flex;
+flex-direction: column;
+box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.4);
+margin-bottom: 20px;
+margin-top: 10px;
+padding: 20px;
+opacity: 0.75;
+}
+
+.about-card:hover {
+transform: translateY(-5px) scale(1.03);
+box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.about-card h2 {
+    margin-bottom: 10px;
+}
+
+.about-card p {
+    margin-bottom: 10px;
+}
+
+.edu-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 1rem;        /* space between date and GPA */
+  margin-bottom: 0.5rem;
+}
+
+.edu-gpa {
+  font-weight: bold;
+  text-align: right;       /* aligns the GPA text if it wraps */
+}
+
+.about-list {
+list-style: none;     /* remove default bullets */
+padding-left: 0;      /* remove default indent */
+}
+
+.about-list li {
+position: relative;   /* for the pseudo-element positioning */
+padding-left: 1em;    /* make room for the dash */
+margin-bottom: 0.5em; /* optional spacing */
+}
+
+/* Mobile responsive */
+
+@media screen and (max-width: 768px) {
+    .main__container {
+        display: grid;
+        grid-template-columns: auto;
+        align-items: center;
+        justify-self: center;
+        width: 100%;
+        margin: 0 auto;
+        height: 90vh;
+    }
+
+    .main__content {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .main__content h1 {
+        font-size: 2.5rem;
+        margin-top: 2rem;
+    }
+
+    .main__content h2 {
+        font-size: 3rem;
+    }
+
+    .main__content p {
+        margin-top: 1rem;
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .main__content h1 {
+        font-size: 2rem;
+        margin-top: 3rem;
+    }
+
+    .main__content h2 {
+        font-size: 2rem;
+    }
+
+    .main__content p {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .main__btn {
+        padding: 12px 36px;
+        margin: 2.5rem 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .resume__container {
+        display: grid;
+        grid-template-columns: auto;
+        align-items: center;
+        justify-self: center;
+        width: 100%;
+        margin: 0 auto;
+        height: 90vh;
+    }
+    /* PDF embed styling */
+    .pdf-container {
+    width: 100%;
+    height: 80vh;
+    border: 1px solid #ccc;
+    }
+    /* Download button styling */
+    .download-button {
+    display: inline-block;
+    margin: 1.5rem 0;
+    padding: 0.75rem 1.25rem;
+    background: #00539C;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    }
+    .download-button:hover {
+    background: #003f7d;
+    }
+
+    .resume__container h1 {
+        font-size: 2rem;
+        margin-top: 3rem;
+    }
+
+    .resume__container h2 {
+        font-size: 2rem;
+    }
+
+    .resume__container p {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+    }
+}
