@@ -423,6 +423,17 @@ transform: skewY(-25deg) rotate(25deg);
   transform: skewY(-25deg) rotate(25deg) translateX(-100vw);
 }
 
+@media screen and (max-width: 480px) {
+    .quote-section::before {
+        top: 5px;
+      }
+      
+      /* bottom bar */
+      .quote-section::after {
+        bottom: 5px;
+      }
+}
+
 .quote-section.in-view::before {
 animation: slideInFromRight 1.2s ease-out forwards;
 }
@@ -530,6 +541,12 @@ border-radius: 12px;
 text-align: center;
 width: 70%;
 height: auto;
+}
+
+@media screen and (max-width: 480px) {
+    .about-text {
+        width: 95%;
+    }
 }
 
 .about-text h2 {
@@ -714,6 +731,13 @@ background: #003f7d;
     opacity: 0.25;
     transform: none;
 }
+
+@media screen and (max-width: 480px) {
+    .project-card{
+        width: 95%;
+    }
+}
+
 .project-card:hover {
     transform: translateY(-5px) scale(1.03);
     box-shadow: 0 4px 16px rgba(0,0,0,0.2);
@@ -1004,6 +1028,12 @@ padding: 20px;
 opacity: 0.75;
 }
 
+@media screen and (max-width: 480px) {
+    .about-card{
+        width: 95%;
+    }
+}
+
 .about-card:hover {
 transform: translateY(-5px) scale(1.03);
 box-shadow: 0 4px 16px rgba(0,0,0,0.2);
@@ -1060,15 +1090,10 @@ margin-bottom: 0.5em; /* optional spacing */
 
     .main__content h1 {
         font-size: 2.5rem;
-        margin-top: 2rem;
-    }
-
-    .main__content h2 {
-        font-size: 3rem;
     }
 
     .main__content p {
-        margin-top: 1rem;
+        margin-top: 2.5rem;
         font-size: 1.5rem;
     }
 }
@@ -1076,7 +1101,6 @@ margin-bottom: 0.5em; /* optional spacing */
 @media screen and (max-width: 480px) {
     .main__content h1 {
         font-size: 2rem;
-        margin-top: 3rem;
     }
 
     .main__content h2 {
@@ -1084,8 +1108,8 @@ margin-bottom: 0.5em; /* optional spacing */
     }
 
     .main__content p {
-        margin-top: 2rem;
         font-size: 1.5rem;
+        margin-top: 2.5rem;
     }
 
     .main__btn {
